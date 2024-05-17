@@ -1,0 +1,756 @@
+openapi: 3.0.1
+info:
+  title: FilmApis
+  description: Api to work with information about films.
+  version: 1.0.0
+servers:
+  - url: 'localhost/8080'
+
+tags:
+  - name: films
+    description: Operations to work with data about films.
+  - name: production companies
+    description: Operations to work with data about production companies.
+  - name: directors
+    description: Operations to work with data about directors.
+
+paths:
+  /films:
+    get:
+      tags:
+        - films
+      summary: Returns a list of films.
+      description: This operation returns a list of films.
+      responses:
+        '200':
+          description: Returns the complete list of artists.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilmOut'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - films
+      summary: Add a new film to the database.
+      description: Allows to add a new film to the database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilmIn'
+      responses:
+        '201':
+          description: New film has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilmIn'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /film/{id}:
+    get:
+      tags:
+        - films
+      summary: Returns a film by id.
+      description: This operation returns a film information using it's id.
+      parameters:
+        - name: id
+          in: path
+          description: Film id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique film information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FilmOut'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - films
+      summary: Delete a film by its ID.
+      description: This operation deletes a film using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Film id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - films
+      summary: Update a film by its ID.
+      description: This operation updates a song using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Film id
+          required: true
+          schema:
+            type: number
+        - name: film_data
+          in: query
+          description: Updated film data
+          required: true
+          schema:
+            $ref: '#/components/schemas/FilmIn'
+      responses:
+        '200':
+          description: Film updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilmOut'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /productionCompany:
+    get:
+      tags:
+        - production companies
+      summary: Returns a list of production companies.
+      description: This operation returns a list of production companies.
+      responses:
+        '200':
+          description: Returns the complete list of production companies.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductionCompanyOut'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - production companies
+      summary: Add a new film to the database.
+      description: Allows to add a new production company to the database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductionCompanyIn'
+      responses:
+        '201':
+          description: New production company has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductionCompanyIn'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /productionCompany/{id}:
+    get:
+      tags:
+        - production companies
+      summary: Returns a production company by id.
+      description: This operation returns a production company information using it's id.
+      parameters:
+        - name: id
+          in: path
+          description: Production company id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique production company information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductionCompanyOut'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - production companies
+      summary: Delete a production company by its ID.
+      description: This operation deletes a production company using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Production company id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - production companies
+      summary: Update a production company by its ID.
+      description: This operation updates a production company using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Production company id
+          required: true
+          schema:
+            type: number
+        - name: production_company_data
+          in: query
+          description: Updated production company data
+          required: true
+          schema:
+            $ref: '#/components/schemas/ProductionCompanyIn'
+      responses:
+        '200':
+          description: Production company updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyOut'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /directors:
+    get:
+      tags:
+        - directors
+      summary: Returns a list of directors.
+      description: This operation returns a list of directors.
+      responses:
+        '200':
+          description: Returns the complete list of directors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectorOut'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - directors
+      summary: Add a new director to the database.
+      description: Allows to add a new director to the database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectorIn'
+      responses:
+        '201':
+          description: New director has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductionCompanyIn'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /director/{id}:
+    get:
+      tags:
+        - directors
+      summary: Returns a director by id.
+      description: This operation returns a director information using it's id.
+      parameters:
+        - name: id
+          in: path
+          description: director id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique director information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirectorOut'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - directors
+      summary: Delete a director by its ID.
+      description: This operation deletes a director using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Director id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - directors
+      summary: Update a director by its ID.
+      description: This operation updates a director using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Director id
+          required: true
+          schema:
+            type: number
+        - name: director_data
+          in: query
+          description: Updated production company data
+          required: true
+          schema:
+            $ref: '#/components/schemas/DirectorIn'
+      responses:
+        '200':
+          description: Director updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorOut'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    FilmOut:
+      type: object
+      properties:
+        id:
+          type: number
+          format: Long
+          example: 10
+          description: Unique film identifier.
+        title:
+          type: string
+          example: Oppenheimer
+          description: Film title
+        genre:
+          type: string
+          example: Historic drama
+          description: Film genre.
+        revenue:
+          type: number
+          format: integer
+          example: 949000000
+          description: Revenue of the film in cinemas.
+        release:
+          type: string
+          format: YYYY-MM-DD
+          example: 2023-07-21
+          description: Day on which the movie was released
+        familyFriendly:
+          type: boolean
+          description: Declares if the movie is suitable for all ages.
+        director:
+          type: object
+          items:
+            $ref: '#/components/schemas/DirectorOut'
+        produtionCompany:
+          type: object
+          items:
+            $ref: '#/components/schemas/ProductionCompanyOut'
+    FilmIn:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Oppenheimer
+          description: Film title
+        genre:
+          type: string
+          example: Historic drama
+          description: Film genre.
+        revenue:
+          type: number
+          format: integer
+          example: 949000000
+          description: Revenue in dollars of the film in cinemas.
+        release:
+          type: string
+          format: YYYY-MM-DD
+          example: 2023-07-21
+          description: Day on which the movie was released
+        familyFriendly:
+          type: boolean
+          description: Declares if the movie is suitable for all ages.
+        directorId:
+          type: number
+          format: Long
+          example: 4
+          description: Director's id.
+        produtionCompany:
+          type: number
+          format: Long
+          example: 12
+          description: Production company's id.
+    ProductionCompanyOut:
+      type: object
+      properties:
+        id:
+          type: number
+          format: Long
+          example: 10
+          description: Unique production company identifier.
+        name:
+          type: string
+          example: Universal Pictures
+          description: Name of the production company.
+        location:
+          type: string
+          example: California, US.
+          description: Location of the company's headquarters.
+        revenue:
+          type: number
+          format: Integer
+          example: 11622000000000
+          description: Revenue in dollars of the production company.
+        established:
+          type: string
+          format: YYYY-MM-DD
+          example: 1912-04-30
+          description: Foundation date of the production company.
+        active:
+          type: boolean
+          description: Declare if the production company is still operating.
+        films:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilmOut'
+    ProductionCompanyIn:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Universal Pictures
+          description: Name of the production company.
+        location:
+          type: string
+          example: California, US.
+          description: Location of the company's headquarters.
+        revenue:
+          type: number
+          format: Integer
+          example: 11622000000000
+          description: Revenue in dollars of the production company.
+        established:
+          type: string
+          format: YYYY-MM-DD
+          example: 1912-04-30
+          description: Foundation date of the production company.
+        active:
+          type: boolean
+          description: Declare if the production company is still operating.
+        filmId:
+          type: number
+          format: Long
+          example: 54
+          description: Film's id.
+    DirectorOut:
+      type: object
+      properties:
+        id:
+          type: number
+          format: Long
+          example: 10
+          description: Unique director identifier.
+        name:
+          type: string
+          example: Christopher
+          description: Director's name.
+        surname:
+          type: string
+          example: Nolan
+          description: Director's surname.
+        accolades:
+          type: number
+          format: Integer
+          example: 4
+          description: Number of awards recieved by the director.
+        birthDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 1970-07-30
+          description: Director's birthdate.
+        oscar:
+          type: boolean
+          description: Declares if the director has been awarded with an Oscar.
+        films:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilmOut'
+    DirectorIn:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Christopher
+          description: Director's name.
+        surname:
+          type: string
+          example: Nolan
+          description: Director's surname.
+        accolades:
+          type: number
+          format: Integer
+          example: 4
+          description: Number of awards recieved by the director.
+        birthDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 1970-07-30
+          description: Director's birthdate.
+        oscar:
+          type: boolean
+          description: Declares if the director has been awarded with an Oscar.
+        films:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilmOut'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          format: int32
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+    NoContent:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 204
+        message: No Content
+    BadRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 400
+        message: Validation error
+    NotFound:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 404
+        message: Not found
+    InternalServerError:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 500
+        message: Internal Server Error
+        error: [ ]
+
