@@ -1,8 +1,8 @@
 package com.svalero.FilmAPI.service;
 import com.svalero.FilmAPI.domain.Director;
 import com.svalero.FilmAPI.dto.DirectorInDto;
+import com.svalero.FilmAPI.exception.EntityNotFoundException;
 import com.svalero.FilmAPI.repository.DirectorRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ public class DirectorService {
     private DirectorRepository directorRepository;
     @Autowired
     private ModelMapper modelMapper;
+    private final String entityName = "Director";
 
     public List<Director> getDirectors() {
         return directorRepository.findAll();
@@ -29,7 +30,7 @@ public class DirectorService {
         if (directorOptional.isPresent()) {
             return directorOptional.get();
         } else {
-            throw new EntityNotFoundException("Director", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 
@@ -40,7 +41,7 @@ public class DirectorService {
             modelMapper.map(directorInDto, director);
             return directorRepository.save(director);
         } else {
-            throw new EntityNotFoundException("Director", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 
@@ -48,7 +49,7 @@ public class DirectorService {
         if (directorRepository.existsById(id)) {
             directorRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("Director", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 }

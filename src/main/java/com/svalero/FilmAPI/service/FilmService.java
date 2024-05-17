@@ -1,8 +1,8 @@
 package com.svalero.FilmAPI.service;
 import com.svalero.FilmAPI.domain.Film;
 import com.svalero.FilmAPI.dto.FilmInDto;
+import com.svalero.FilmAPI.exception.EntityNotFoundException;
 import com.svalero.FilmAPI.repository.FilmRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ public class FilmService {
     private FilmRepository filmRepository;
     @Autowired
     private ModelMapper modelMapper;
+    private final String entityName = "Film";
 
     public List<Film> getFilms() {
         return filmRepository.findAll();
@@ -29,7 +30,7 @@ public class FilmService {
         if (filmOptional.isPresent()) {
             return filmOptional.get();
         } else {
-            throw new EntityNotFoundException("Film", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 
@@ -40,7 +41,7 @@ public class FilmService {
             modelMapper.map(filmInDto, film);
             return filmRepository.save(film);
         } else {
-            throw new EntityNotFoundException("Film", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 
@@ -48,7 +49,7 @@ public class FilmService {
         if (filmRepository.existsById(id)) {
             filmRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("Film", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 }

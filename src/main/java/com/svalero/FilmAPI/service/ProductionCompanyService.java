@@ -1,8 +1,8 @@
 package com.svalero.FilmAPI.service;
 import com.svalero.FilmAPI.domain.ProductionCompany;
 import com.svalero.FilmAPI.dto.ProductionCompanyInDto;
+import com.svalero.FilmAPI.exception.EntityNotFoundException;
 import com.svalero.FilmAPI.repository.ProductionCompanyRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ public class ProductionCompanyService {
     private ProductionCompanyRepository productionCompanyRepository;
     @Autowired
     private ModelMapper modelMapper;
+    private final String entityName = "Production Company";
 
     public List<ProductionCompany> getProductionCompanies() {
         return productionCompanyRepository.findAll();
@@ -29,7 +30,7 @@ public class ProductionCompanyService {
         if (productionCompanyOptional.isPresent()) {
             return productionCompanyOptional.get();
         } else {
-            throw new EntityNotFoundException("ProductionCompany", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 
@@ -40,7 +41,7 @@ public class ProductionCompanyService {
             modelMapper.map(productionCompanyInDto, productionCompany);
             return productionCompanyRepository.save(productionCompany);
         } else {
-            throw new EntityNotFoundException("ProductionCompany", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 
@@ -48,7 +49,7 @@ public class ProductionCompanyService {
         if (productionCompanyRepository.existsById(id)) {
             productionCompanyRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("ProductionCompany", id);
+            throw new EntityNotFoundException(entityName, id);
         }
     }
 }
