@@ -1,6 +1,7 @@
 package com.svalero.FilmAPI.controller;
 import com.svalero.FilmAPI.domain.Director;
 import com.svalero.FilmAPI.dto.DirectorInDto;
+import com.svalero.FilmAPI.service.DirectorService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

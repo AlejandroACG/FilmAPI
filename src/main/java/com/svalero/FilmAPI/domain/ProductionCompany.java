@@ -16,7 +16,7 @@ public class ProductionCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id;
+    private long id;
 
     @OneToMany(mappedBy = "productionCompany", cascade = CascadeType.ALL)
     @JsonManagedReference

@@ -16,7 +16,7 @@ public class Director {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id;
+    private long id;
 
     @OneToMany(mappedBy = "director", cascade = CascadeType.ALL)
     @JsonManagedReference

@@ -14,7 +14,7 @@ public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "production_company_id", nullable = false)
