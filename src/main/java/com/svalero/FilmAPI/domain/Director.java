@@ -16,15 +16,10 @@ public class Director {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private Long id;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "director", cascade = CascadeType.ALL)
     @JsonManagedReference
-    @JoinTable(
-            name = "directed",
-            joinColumns = @JoinColumn(name = "director_id"),
-            inverseJoinColumns = @JoinColumn(name = "film_id")
-    )
     private List<Film> films = new ArrayList<>();
 
     @Column

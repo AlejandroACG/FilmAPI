@@ -1,11 +1,11 @@
 package com.svalero.FilmAPI.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,11 +16,11 @@ public class ProductionCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private Long id;
 
-    @OneToMany(mappedBy = "productionCompanies", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productionCompany", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Film> films;
+    private List<Film> films = new ArrayList<>();
 
     @Column
     private String name;

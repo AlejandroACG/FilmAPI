@@ -1,13 +1,10 @@
 package com.svalero.FilmAPI.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,16 +14,17 @@ public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "production_company_id", nullable = false)
     @JsonBackReference
-    private List<ProductionCompany> productionCompanies;
+    private ProductionCompany productionCompany;
 
-    @ManyToMany(mappedBy = "directed")
+    @ManyToOne
+    @JoinColumn(name = "director_id", nullable = false)
     @JsonBackReference
-    private List<Director> directors = new ArrayList<>();
+    private Director director;
 
     @Column
     private String title;
