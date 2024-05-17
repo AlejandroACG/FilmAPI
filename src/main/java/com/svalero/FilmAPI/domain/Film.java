@@ -35,8 +35,8 @@ public class Film {
     @Column
     private Integer revenue;
 
-    @Column
-    private LocalDate release;
+    @Column(name = "release_date")
+    private LocalDate releaseDate;
 
     @Column(name = "family_friendly")
     private Boolean familyFriendly;

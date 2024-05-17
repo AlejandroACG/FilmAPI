@@ -13,6 +13,6 @@ public class FilmInDto {
     private String title;
     private String genre;
     private Integer revenue;
-    private LocalDate release;
+    private LocalDate releaseDate;
     private Boolean familyFriendly;
 }
