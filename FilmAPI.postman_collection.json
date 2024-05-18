@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b767ed65-2886-420e-96b6-805f3bcce452",
+		"_postman_id": "50546ecf-9001-41b2-af73-ae0e0e471864",
 		"name": "FilmAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31328466"
+		"_exporter_id": "32372917"
 	},
 	"item": [
 		{
@@ -82,6 +82,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pepe\",\r\n    \"surname\": \"García\",\r\n    \"accolades\": 8,\r\n    \"birthdate\": \"2024-05-17\",\r\n    \"oscar\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/directors",
 							"protocol": "http",
@@ -140,7 +149,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -175,6 +184,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Paco\",\r\n    \"surname\": \"Porras\",\r\n    \"accolades\": 8,\r\n    \"birthdate\": \"2024-05-17\",\r\n    \"oscar\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/director/:id",
 							"protocol": "http",
@@ -189,7 +207,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -238,7 +256,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -323,15 +341,24 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Visual Studio\",\r\n    \"location\": \"Huesca\",\r\n    \"revenue\": 89382,\r\n    \"established\": \"2024-05-16\",\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/production-company",
+							"raw": "http://localhost:8080/production-companies",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"production-company"
+								"production-companies"
 							]
 						}
 					},
@@ -381,7 +408,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -416,6 +443,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Visual Studio\",\r\n    \"location\": \"Huesca\",\r\n    \"revenue\": 89382,\r\n    \"established\": \"2024-05-16\",\r\n    \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/production-company/:id",
 							"protocol": "http",
@@ -430,7 +466,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -479,7 +515,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -564,6 +600,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productionCompanyId\": 1,\r\n    \"directorId\": 1,\r\n    \"title\": \"Lo que el viento se llevó\",\r\n    \"genre\": \"Acción\",\r\n    \"revenue\": 2,\r\n    \"releaseDate\": \"2024-05-16\",\r\n    \"familyFriendly\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/films",
 							"protocol": "http",
@@ -622,7 +667,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -657,6 +702,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productionCompanyId\": 1,\r\n    \"directorId\": 1,\r\n    \"title\": \"Lo que el viento se llevó\",\r\n    \"genre\": \"Acción\",\r\n    \"revenue\": 1,\r\n    \"releaseDate\": \"2024-05-16\",\r\n    \"familyFriendly\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8080/film/:id",
 							"protocol": "http",
@@ -671,7 +725,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -720,7 +774,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
