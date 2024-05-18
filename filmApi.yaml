@@ -547,14 +547,6 @@ components:
         familyFriendly:
           type: boolean
           description: Declares if the movie is suitable for all ages.
-        director:
-          type: object
-          items:
-            $ref: '#/components/schemas/DirectorOut'
-        produtionCompany:
-          type: object
-          items:
-            $ref: '#/components/schemas/ProductionCompanyOut'
     FilmIn:
       type: object
       properties:
@@ -584,7 +576,7 @@ components:
           format: Long
           example: 4
           description: Director's id.
-        produtionCompany:
+        productionCompanyId:
           type: number
           format: Long
           example: 12
@@ -646,11 +638,7 @@ components:
         active:
           type: boolean
           description: Declare if the production company is still operating.
-        filmId:
-          type: number
-          format: Long
-          example: 54
-          description: Film's id.
+
     DirectorOut:
       type: object
       properties:
@@ -708,10 +696,6 @@ components:
         oscar:
           type: boolean
           description: Declares if the director has been awarded with an Oscar.
-        films:
-          type: array
-          items:
-            $ref: '#/components/schemas/FilmOut'
     ErrorResponse:
       type: object
       properties:
