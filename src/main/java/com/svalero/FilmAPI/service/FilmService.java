@@ -35,7 +35,7 @@ public class FilmService {
                 Film film = modelMapper.map(filmInDto, Film.class);
                 film.setProductionCompany(productionCompanyRepository.findById(productionCompanyId).orElse(null));
                 film.setDirector(directorRepository.findById(directorId).orElse(null));
-                return modelMapper.map(filmRepository.save(film), Film.class);
+                return filmRepository.save(film);
             } else {
                 throw new EntityNotFoundException("Director", filmInDto.getDirectorId());
             }
@@ -56,9 +56,21 @@ public class FilmService {
     public Film updateFilm(long id, FilmInDto filmInDto) {
         Optional<Film> filmOptional = filmRepository.findById(id);
         if (filmOptional.isPresent()) {
-            Film film = filmOptional.get();
-            modelMapper.map(filmInDto, film);
-            return filmRepository.save(film);
+            long productionCompanyId = filmInDto.getProductionCompanyId();
+            long directorId = filmInDto.getDirectorId();
+            if (productionCompanyRepository.existsById(productionCompanyId)) {
+                if (directorRepository.existsById(directorId)) {
+                    Film film = filmOptional.get();
+                    modelMapper.map(filmInDto, film);
+                    film.setProductionCompany(productionCompanyRepository.findById(productionCompanyId).orElse(null));
+                    film.setDirector(directorRepository.findById(directorId).orElse(null));
+                    return filmRepository.save(film);
+                } else {
+                    throw new EntityNotFoundException("Director", filmInDto.getDirectorId());
+                }
+            } else {
+                throw new EntityNotFoundException("Production Company", filmInDto.getProductionCompanyId());
+            }
         } else {
             throw new EntityNotFoundException(entityName, id);
         }
