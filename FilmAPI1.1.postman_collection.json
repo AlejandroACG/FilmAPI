@@ -64,7 +64,7 @@
 									"    pm.expect(pm.response.code).to.equal(201);\r",
 									"})\r",
 									"\r",
-									"pm.test(\"Los campo 'name' no puede estar vacío\", function() {\r",
+									"pm.test(\"El campo 'name' no puede estar vacío\", function() {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.name).to.not.be.empty; \r",
 									"});\r",
@@ -252,6 +252,31 @@
 			"item": [
 				{
 					"name": "getProductionCompanies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"El estado de la respuesta es 200 OK\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta contiene datos válidos\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array');\r",
+									"    pm.expect(jsonData.length).to.be.above(0); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta se entrega en un tiempo razonable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -271,6 +296,30 @@
 				},
 				{
 					"name": "postProductionCompany",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Los campo 'name' no puede estar vacío\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.not.be.empty; \r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta se entrega en un tiempo razonable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -290,6 +339,31 @@
 				},
 				{
 					"name": "getProductionCompanyById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"El estado de la respuesta es 200 OK\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta contiene datos válidos\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.be.empty; \r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta contiene un campo específico\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id'); \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -316,6 +390,29 @@
 				},
 				{
 					"name": "updateProductionCompany",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is not empty\", function () {\r",
+									"    pm.response.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta se entrega en un tiempo razonable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -342,6 +439,29 @@
 				},
 				{
 					"name": "deleteProductionCompany",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"El estado de la respuesta es 204 No Content\", function() {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta está vacía\", function() {\r",
+									"    pm.expect(pm.response.text()).to.be.empty; \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tiempo de respuesta dentro del rango aceptable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -373,6 +493,31 @@
 			"item": [
 				{
 					"name": "getFilms",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"El estado de la respuesta es 200 OK\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta contiene datos válidos\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.be.an('array');\r",
+									"    pm.expect(jsonData.length).to.be.above(0); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta se entrega en un tiempo razonable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -392,6 +537,30 @@
 				},
 				{
 					"name": "postFilm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function() {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"El campo 'title' no puede estar vacío\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.title).to.not.be.empty; \r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta se entrega en un tiempo razonable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -411,6 +580,31 @@
 				},
 				{
 					"name": "getFilmById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"El estado de la respuesta es 200 OK\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta contiene datos válidos\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.not.be.empty; \r",
+									"    pm.expect(jsonData).to.be.an('object'); \r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta contiene un campo específico\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('id'); \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -437,6 +631,29 @@
 				},
 				{
 					"name": "updateFilm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is not empty\", function () {\r",
+									"    pm.response.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta se entrega en un tiempo razonable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -463,6 +680,29 @@
 				},
 				{
 					"name": "deleteFilm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"El estado de la respuesta es 204 No Content\", function() {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"La respuesta está vacía\", function() {\r",
+									"    pm.expect(pm.response.text()).to.be.empty; \r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tiempo de respuesta dentro del rango aceptable\", function() {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000); \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
